@@ -1,0 +1,11 @@
+INSERT INTO tbl_LookUpExternalLoginSource(ExternalTypeId,ExternalSourceName)
+VALUES(1,'Facebook')
+
+INSERT INTO tbl_LookUpStatus(StatusId,Desc)
+VALUES(1,'New')
+
+INSERT INTO tbl_LookUpStatus(StatusId,Desc)
+VALUES(2,'Complete')
+
+INSERT INTO tbl_LookUpStatus(StatusId,Desc)
+VALUES(3,'Delete')
