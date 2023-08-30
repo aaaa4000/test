@@ -1,3 +1,6 @@
+#Before Start
+Please install SQL server and create a database, run script(database, store procedures and LookUpData) or Use the backup provided
+
 # To do Task
 A Test for verify
 
