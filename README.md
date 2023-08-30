@@ -19,7 +19,7 @@ Steps :
 *In our case the port id is 8080
 
 # How to test
-Program consume of Junittest , please execute the test for several prepare test case like
+Program consist of Junit test , please execute the test program for several prepare test case like :
 - Test login
 - Test login fail
 - Create task with wrong http method
