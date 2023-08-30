@@ -1,5 +1,5 @@
-#Before Start
-Please install SQL server and create a database, run script(database, store procedures and LookUpData) or Use the backup provided
+# Before Start
+Please install SQL server and create a database, run script(database, store procedures and LookUpData) or Use the backup provided (TODOLIST.BAK)
 
 # To do Task
 A Test for verify
