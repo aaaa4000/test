@@ -1,0 +1,122 @@
+GO
+CREATE PROCEDURE [dbo].[sp_tbl_Todo_Insert]
+	@xUserId bigint,
+	@xTodoDescription nvarchar(300),
+	@xStatus tinyint
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	INSERT INTO tbl_Todo(UserId,TodoDescription,[Status])
+	VALUES (@xUserId,@xTodoDescription,@xStatus)
+
+    
+END
+GO
+
+GO
+CREATE PROCEDURE [dbo].[sp_tbl_Todo_List]
+	@xUserId bigint
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	SELECT ID,UserId,TodoDescription,CreateDate,LastUpdateTime,[Status] FROM tbl_Todo WITH(NOLOCK)
+	WHERE UserId = @xUserId AND [Status] != 3
+	Order By ID DESC,CreateDate DESC
+    
+END
+GO
+
+
+GO
+/*EXEC [dbo].[sp_tbl_Todo_Update] 5,1,2*/
+CREATE PROCEDURE [dbo].[sp_tbl_Todo_Update]
+	@xId bigint,
+	@xUserId bigint,
+	@xStatus int
+AS
+BEGIN
+
+	SET NOCOUNT OFF;
+
+	UPDATE tbl_Todo
+		SET [Status] = @xStatus
+	WHERE ID = @xId AND UserId = @xUserId
+
+END
+GO
+
+
+GO
+/*
+EXEC [dbo].[sp_tbl_User_Insert] '','1'
+*/
+
+CREATE PROCEDURE [dbo].[sp_tbl_User_Insert]
+	@xExternalId varchar(100),
+	@xExternalTypeId tinyint
+AS
+BEGIN
+	
+	SET NOCOUNT OFF;
+
+	IF NOT EXISTS(SELECT NULL FROM tbl_User WHERE ExternalId = @xExternalId AND ExternalTypeId = @xExternalTypeId)
+	BEGIN
+		INSERT INTO tbl_User(ExternalId,ExternalTypeId)
+		VALUES (@xExternalId,@xExternalTypeId)
+
+		SELECT SCOPE_IDENTITY() As UserId
+	END
+	ELSE
+	BEGIN
+		SELECT UserId FROM tbl_User WITH(NOLOCK) WHERE ExternalId = @xExternalId AND ExternalTypeId = @xExternalTypeId
+	END
+END
+GO
+
+GO
+/*
+EXEC dbo.sp_tbl_UserSession_Get 
+*/
+CREATE PROCEDURE [dbo].[sp_tbl_UserSession_Get]
+	@xUserId bigint
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	
+	SELECT TOP(1) AccessToken,Token,Exipred FROM tbl_UserSession-- WITH(NOLOCK)
+	WHERE UserId = @xUserId
+	ORDER BY Exipred DESC
+
+    
+END
+GO
+
+
+GO
+CREATE PROCEDURE [dbo].[sp_tbl_UserSession_Insert]
+	@xUserId bigint,
+	@xAccessToken varchar(1024),
+	@xToken varchar(1024),
+	@xExpiredDate datetime
+
+AS
+BEGIN
+	
+	SET NOCOUNT OFF;
+
+	INSERT INTO tbl_UserSession(UserId,AccessToken,Token,Exipred)
+	VALUES (@xUserId,@xAccessToken,@xToken,@xExpiredDate)
+
+   
+END
+GO
+
+
+
+
+
+
