@@ -1,1 +1,95 @@
+GO
+
+CREATE TABLE [dbo].[tbl_LookUpExternalLoginSource](
+	[ExternalTypeId] [tinyint] NOT NULL,
+	[ExternalSourceName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_tbl_LookUpExternalLoginSource] PRIMARY KEY CLUSTERED 
+(
+	[ExternalTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+GO
+
+CREATE TABLE [dbo].[tbl_LookUpStatus](
+	[StatusId] [int] NOT NULL,
+	[Desc] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+
+
+GO
+
+CREATE TABLE [dbo].[tbl_Todo](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserId] [bigint] NOT NULL,
+	[TodoDescription] [nvarchar](300) NOT NULL,
+	[CreateDate] [date] NOT NULL,
+	[LastUpdateTime] [datetime] NOT NULL,
+	[Status] [tinyint] NOT NULL,
+ CONSTRAINT [PK_tbl_Todo] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbl_Todo] ADD  CONSTRAINT [DF_tbl_Todo_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+GO
+
+ALTER TABLE [dbo].[tbl_Todo] ADD  CONSTRAINT [DF_tbl_Todo_LastUpdateTime]  DEFAULT (getdate()) FOR [LastUpdateTime]
+GO
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_tbl_Todo] ON [dbo].[tbl_Todo]
+(
+	[CreateDate] DESC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+
+
+GO
+
+CREATE TABLE [dbo].[tbl_User](
+	[UserId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ExternalId] [varchar](100) NOT NULL,
+	[ExternalTypeId] [tinyint] NOT NULL,
+	[CreationDate] [date] NOT NULL,
+ CONSTRAINT [PK_tbl_User] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbl_User] ADD  CONSTRAINT [DF_tbl_User_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+
+GO
+CREATE TABLE [dbo].[tbl_UserSession](
+	[UserId] [bigint] NOT NULL,
+	[AccessToken] [varchar](1024) NOT NULL,
+	[Token] [varchar](1024) NOT NULL,
+	[Exipred] [datetime] NOT NULL,
+	[CreationDate] [date] NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbl_UserSession] ADD  CONSTRAINT [DF_tbl_UserSession_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_tbl_UserSession] ON [dbo].[tbl_UserSession]
+(
+	[UserId] ASC,
+	[Exipred] DESC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+
+
+
 
