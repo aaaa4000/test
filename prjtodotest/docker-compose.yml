@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  spring-boot-rest-api-app:
+    image: prjtodotest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8087:8080
+    volumes:
+      - /data/prjtodotest

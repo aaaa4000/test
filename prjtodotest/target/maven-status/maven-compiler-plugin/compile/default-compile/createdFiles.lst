@@ -1,0 +1,11 @@
+com\todotest\prjtodotest\PrjtodotestApplication.class
+com\todotest\prjtodotest\SecurityConfiguration.class
+com\todotest\prjtodotest\TodoServicesController.class
+com\todotest\prjtodotest\Class\Utils.class
+com\todotest\prjtodotest\SQLConnector.class
+com\todotest\prjtodotest\Class\clsFBToken.class
+com\todotest\prjtodotest\OAuthController.class
+com\todotest\prjtodotest\Class\clsTodoResponsitory.class
+com\todotest\prjtodotest\Class\clslsttodo.class
+com\todotest\prjtodotest\Class\clsTodo.class
+com\todotest\prjtodotest\Class\clsFBuserProfile.class

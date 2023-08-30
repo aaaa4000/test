@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 364846697222-g0uk0cdqhifr7fr2916cm2v3kfl7p7ja.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid,profile,email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
