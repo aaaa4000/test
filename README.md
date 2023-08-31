@@ -10,7 +10,7 @@ Steps :
 3. List Todo 
 - GET http://localhost:{portid}/task/listtodo/1
 4. Create task
-- POST http://localhost:{portid}/task/createtask?uid=1
+- POST http://localhost:{portid}/task/createtask?uid={userId}
 - post with text plain within the body for the content
 5. Mark complete task
 - POST http://localhost:{portid}/task/complete/{TodoID}/{UserId}
